@@ -1,4 +1,4 @@
-##APUNTES
+## APUNTES
 
 Laravel está orientado para realizar aplicaciones rápidas.
 
@@ -48,7 +48,38 @@ La ruta dond se encuentran los contorladores es: app/https/Controllers/ aquí
 ```
 >php artisan make:controller PagesController
 ```
+@yield('content') --> Sirve para etiquetar/pegamento del contenido que existe en otra template
+
+Entonces en otra template para relacionar el yeald --> @section('content')
+                                                        aquí el contenido
+                                                        @endsection
 
 @extends('layouts.app') --> indica que hereda y extiende otro archivo
 
 'código'
+
+ @forelse --> igual que foreach pero con la posibilidad de indicar si no existe información indicarlo.
+
+ ## Base de datos
+
+ Para crear una tabla --> >php artisan make:migration create_messages_table --create messages
+
+ Para actualizar: composer update
+
+ Para actualizar la db con las migraciones tenemos que tener en cuenta de: 
+
+ en nuestro proyecto config/database.php, posterior a esto cambie las siguientes lineas
+
+'charset' => 'utf8mb4',
+ 'collation' => 'utf8mb4_unicode_ci',
+
+A
+
+'charset' => 'utf8',
+ 'collation' => 'utf8_unicode_ci',
+
+ Posteriormente ejecutamos >php artisan migrate
+
+ Para crear un índice: make:migration add_created_at_index_to_messsages_table --table messsages
+
+ nombre_columna + index + nombre_tabla 
