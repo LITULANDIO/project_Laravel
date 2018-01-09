@@ -2,38 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Message;
 use Illuminate\Http\Request;
 
-class PagesController extends Controller
-{
+class PagesController extends Controller{
   
 public function home () {
-   $messages = [
-	   [
-	   'id' => 1,
-	   'content' => 'My message',
-	   'image' => 'http://lorempixel.com/600/338',
-
-	   ],
-	   [
-		'id' => 2,
-		'content' => 'My message 1',
-		'image' => 'http://lorempixel.com/600/339',
- 
-		],
-		[
-		'id' => 3,
-		'content' => 'My message 2',
-		'image' => 'http://lorempixel.com/600/340',
-	 
-		],
-		[
-		'id' => 4,
-		'content' => 'My message 3',
-		'image' => 'http://lorempixel.com/600/341',
-			 
-		],
-		];
+   $messages = Message::all();
 
 	return view('welcome', [
 		'messages' => $messages,
