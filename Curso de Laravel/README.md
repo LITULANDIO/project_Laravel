@@ -83,3 +83,23 @@ A
  Para crear un índice: make:migration add_created_at_index_to_messsages_table --table messsages
 
  nombre_columna + index + nombre_tabla 
+
+ Para volver atrás todas las migraciones: >php artisan migrate:reset
+
+ Para volver atrás a una migración anterior: >php artisan migrate:rollback
+
+ Para volver atràs y volver a migrar: >php artisan migrate:refresh 
+
+ Para crear formularios seguros con Laravel, usaremos la función =>  {{csrf_field()}} en cualquier parte dentro de <form>, ésto nos generará un token de autentificación.
+
+ - Validación de formularios:
+
+ $this->validate($request) => si no se escribe nada en el input al enviar el form redirije a la misma página
+
+ @if ($errors->any()) => devolverá algun error si lo hay
+
+ Hay otra manera de validar los forms sin tener la necesidad de usar más lineas de código de lo debido, usando: 
+ >php artisan make:request CreateMessageRequest
+
+ Si aparace éste error:  MassAssignmentException hay que usar protected $guarded = [];
+
