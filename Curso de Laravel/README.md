@@ -103,3 +103,7 @@ A
 
  Si aparace éste error:  MassAssignmentException hay que usar protected $guarded = [];
 
+ Seeding y Model factories --> para  llenar nuestra base de datos de mensajes
+
+ Tinker en la versión 5.4 y/o posteriores es posible que no aparezca comó un paquete interno interna, sino que será externa, revisar en package.json si está isntalado y en >config/app.php y mirar si aparece Tinker en providers.
+
