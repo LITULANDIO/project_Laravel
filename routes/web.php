@@ -15,10 +15,10 @@ Route::get('/', 'PagesController@home');
 
 Route::get('/messages/{message}', 'MessagesController@show');
 
-Route::post('/messages/create', 'MessagesController@create');
+Route::post('/messages/create', 'MessagesController@create')->middleware('auth');
    
-
-
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/{username}', 'UsersController@show');
+
+Route::get('/home', 'HomeController@index');

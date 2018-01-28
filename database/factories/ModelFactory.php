@@ -17,9 +17,11 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
 
     return [
         'name' => $faker->name,
+        'username' => $faker->username,
         'email' => $faker->unique()->safeEmail,
         'password' => $password ?: $password = bcrypt('secret'),
         'remember_token' => str_random(10),
+        'avatar' => $faker->ImageUrl(300, 300, 'people'),
     ];
 });
 
@@ -27,7 +29,9 @@ $factory->define(App\Message::class, function(Faker\Generator $faker){
     return[ 
         //devuelve texto en diferentes en formatos
         'content'=> $faker->realText(random_int(20, 160)),
-        'image'=> $faker->imageUrl(600, 338)
+        'image'=> $faker->imageUrl(600, 338),
+        'created_at' => $faker->dateTimeThisDecade,
+        'updated_at' => $faker->dateTimeThisDecade
 
     ];
 

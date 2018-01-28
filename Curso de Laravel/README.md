@@ -103,7 +103,45 @@ A
 
  Si aparace éste error:  MassAssignmentException hay que usar protected $guarded = [];
 
- Seeding y Model factories --> para  llenar nuestra base de datos de mensajes
+ Seeding y Model factories --> para  llenar nuestra base de datos de mensajes para hacerlo de manera práctica, sencilla y rápida a modo de prueba.
 
  Tinker en la versión 5.4 y/o posteriores es posible que no aparezca comó un paquete interno interna, sino que será externa, revisar en package.json si está isntalado y en >config/app.php y mirar si aparece Tinker en providers.
+
+ >php artisan tinker 
+
+ Podemos crear e insertar un nuevo objeto en la bd y poder comprovar que se ha insertado.
+
+ $message = factory(App\Message::class)->create()
+
+ >php artisan db:seed
+
+ Nos creará directamente todos los mensajes, previamente se ha configurado en database/seeds/databaseSeeder.php 
+
+   factory(App\Message::class)
+            ->times(100)
+            ->create();
+
+- Cómo volver para atrás y volver a regenerar la bd en sencillos pasos:
+
+Con éste comando vuelve atràs todas las migrations, refresca y vuelve a regenerar las migrations y el seed.
+>php artisan migrate:refresh --seed
+
+- Cómo paginar
+En el controller:
+    Message::paginate(10)
+
+- En la vista:
+    @if(count($messages))
+        {{ $messages->links()  }}
+    @endif
+
+Autentificación con usuarios:
+
+1- Hacer un backup del template
+2- >php artisan make:auth
+
+
+
+
+
 
