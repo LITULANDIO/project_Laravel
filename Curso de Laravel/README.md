@@ -62,8 +62,10 @@ Entonces en otra template para relacionar el yeald --> @section('content')
 
  ## Base de datos
 
- Para crear una tabla --> >php artisan make:migration create_messages_table --create messages
-
+ Para crear una tabla --> 
+ ```
+ >php artisan make:migration create_messages_table --create messages
+```
  Para actualizar: composer update
 
  Para actualizar la db con las migraciones tenemos que tener en cuenta de: 
@@ -84,12 +86,18 @@ A
 
  nombre_columna + index + nombre_tabla 
 
- Para volver atrás todas las migraciones: >php artisan migrate:reset
-
- Para volver atrás a una migración anterior: >php artisan migrate:rollback
-
- Para volver atràs y volver a migrar: >php artisan migrate:refresh 
-
+ Para volver atrás todas las migraciones: 
+ ```
+ >php artisan migrate:reset
+```
+ Para volver atrás a una migración anterior: 
+ ```
+ >php artisan migrate:rollback
+```
+ Para volver atràs y volver a migrar: 
+ ```
+ >php artisan migrate:refresh 
+```
  Para crear formularios seguros con Laravel, usaremos la función =>  {{csrf_field()}} en cualquier parte dentro de <form>, ésto nos generará un token de autentificación.
 
  - Validación de formularios:
@@ -99,49 +107,74 @@ A
  @if ($errors->any()) => devolverá algun error si lo hay
 
  Hay otra manera de validar los forms sin tener la necesidad de usar más lineas de código de lo debido, usando: 
+ ```
  >php artisan make:request CreateMessageRequest
-
+```
  Si aparace éste error:  MassAssignmentException hay que usar protected $guarded = [];
 
  Seeding y Model factories --> para  llenar nuestra base de datos de mensajes para hacerlo de manera práctica, sencilla y rápida a modo de prueba.
 
  Tinker en la versión 5.4 y/o posteriores es posible que no aparezca comó un paquete interno interna, sino que será externa, revisar en package.json si está isntalado y en >config/app.php y mirar si aparece Tinker en providers.
-
+```
  >php artisan tinker 
-
+```
  Podemos crear e insertar un nuevo objeto en la bd y poder comprovar que se ha insertado.
-
+```
  $message = factory(App\Message::class)->create()
-
  >php artisan db:seed
-
+```
  Nos creará directamente todos los mensajes, previamente se ha configurado en database/seeds/databaseSeeder.php 
-
+```
    factory(App\Message::class)
             ->times(100)
             ->create();
-
+```
 - Cómo volver para atrás y volver a regenerar la bd en sencillos pasos:
 
 Con éste comando vuelve atràs todas las migrations, refresca y vuelve a regenerar las migrations y el seed.
+```
 >php artisan migrate:refresh --seed
-
+```
 - Cómo paginar
 En el controller:
+```
     Message::paginate(10)
-
+```
 - En la vista:
+```
     @if(count($messages))
         {{ $messages->links()  }}
     @endif
-
+```
 Autentificación con usuarios:
 
 1- Hacer un backup del template
 2- >php artisan make:auth
 
+Si queremos editar una tabla para añadir más campos, crearemos una nueva migration ejemplo: vamos a editar la tabla users
+```
+>php artisan make:migration add_username_and_avatar_to_users_table --table users
+```
+Una vez generada nos dirijimos a migrations/ y accedemos a ella para insertar los 2 campos / y la eliminación de ellos, guardamos y volvemos a la consola para ejecutar:
+
+```
+>php artisan migrate (puede darse el caso de que nos de error)
+```
+Para ello lo que podemos hacer es borrar la db y vovlerla a crear:
+```
+>php artisan migrate:reset
+
+>php artisan migrate
+```
+Para crear una clave foranea relación de una tabla a otra:
+
+$table->integer('user_id')->unsigned();
+$table->foreign('user_id')->references('id')->on('users');
+
+y luego los respectivos drops de la clave y tabla
 
 
+->middleware('auth'); => Espera que esté autenticado el usuario.
 
 
 
